@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://Effects/rain.shader" type="Shader" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+seed = 7
+period = 25.2
+lacunarity = 0.82
+
+[sub_resource type="NoiseTexture" id=2]
+seamless = true
+noise = SubResource( 1 )
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/intensity = 0.003
+shader_param/noise = SubResource( 2 )

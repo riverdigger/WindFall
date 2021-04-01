@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://Items/Item.gd" type="Script" id=1]
+[ext_resource path="res://Player/Hat/hat_jester.png" type="Texture" id=2]
+[ext_resource path="res://Items/Icons/hat_jester.png" type="Texture" id=3]
+[ext_resource path="res://Player/Hat/hat_jester_mask.png" type="Texture" id=4]
+
+[resource]
+script = ExtResource( 1 )
+name = "Jester Hat"
+icon = ExtResource( 3 )
+texture = ExtResource( 2 )
+mask_texture = ExtResource( 4 )
+show_hair = true
+show_bottom = false
+show_shoes = false
+show_cape = false
+tuckable = false
+speed_mod = 0.0
+type_roll_weight = 0.05
+tot_roll_weight = 1.0
+type = "HAT"

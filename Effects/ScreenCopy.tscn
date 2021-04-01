@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/black_pixel.png" type="Texture" id=1]
+[ext_resource path="res://Effects/outline_buffer_material.tres" type="Material" id=2]
+
+[node name="BackBufferCopy" type="BackBufferCopy"]
+z_index = 100
+copy_mode = 0
+rect = Rect2( -100, -100, 200, 200 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = ExtResource( 2 )
+margin_left = -300.0
+margin_top = -160.0
+margin_right = 300.0
+margin_bottom = 160.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

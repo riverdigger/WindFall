@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://Items/Item.gd" type="Script" id=1]
+[ext_resource path="res://Items/Icons/cape_royal.png" type="Texture" id=2]
+[ext_resource path="res://Player/Capes/cape_back_royal.png" type="Texture" id=3]
+[ext_resource path="res://Player/Capes/cape_royal.png" type="Texture" id=4]
+
+[resource]
+script = ExtResource( 1 )
+name = "Royal Cape"
+icon = ExtResource( 2 )
+texture = ExtResource( 4 )
+back_texture = ExtResource( 3 )
+show_hair = false
+show_bottom = false
+show_shoes = false
+show_cape = false
+tuckable = false
+speed_mod = 0.0
+type_roll_weight = 0.1
+tot_roll_weight = 1.0
+type = "CAPE"

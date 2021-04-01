@@ -1,0 +1,111 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Items/WorldItem.gd" type="Script" id=1]
+[ext_resource path="res://Shadows/shadow_item.png" type="Texture" id=2]
+[ext_resource path="res://Hitboxes and Hurtboxes/SoftCollision.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Items/PlayerDriftZone.gd" type="Script" id=4]
+[ext_resource path="res://Items/PickUpZone.gd" type="Script" id=5]
+[ext_resource path="res://Items/Icons/bottom_platelegs.png" type="Texture" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 44.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 9.05539
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 4.0
+
+[sub_resource type="Animation" id=5]
+resource_name = "Idle"
+length = 2.0
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Icon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.85, 1.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 0, -16 ), Vector2( 0, -16.5 ), Vector2( 0, -15 ), Vector2( 0, -12 ), Vector2( 0, -8 ), Vector2( 0, -11 ), Vector2( 0, -10 ), Vector2( 0, -8 ), Vector2( 0, -9 ), Vector2( 0, -9 ), Vector2( 0, -8 ), Vector2( 0, -8 ), Vector2( 0, -7 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Icon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.05, 1.85, 1.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 1.1 ), Vector2( 0.9, 1.1 ), Vector2( 0.95, 1.05 ), Vector2( 1, 1.05 ), Vector2( 1, 1 ), Vector2( 1.1, 0.95 ), Vector2( 0.95, 1.1 ), Vector2( 1, 1.05 ), Vector2( 1.1, 0.95 ), Vector2( 0.95, 1.1 ), Vector2( 1, 1.05 ), Vector2( 1.1, 0.95 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.2, 0.8 ) ]
+}
+
+[node name="Item" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="Shadow" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Icon" type="Sprite" parent="."]
+position = Vector2( 0, -8.22062 )
+scale = Vector2( 1.08897, 0.961031 )
+texture = ExtResource( 6 )
+
+[node name="PlayerDriftZone" type="Area2D" parent="."]
+visible = false
+position = Vector2( 0, -8 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDriftZone"]
+shape = SubResource( 1 )
+
+[node name="PickUpZone" type="Area2D" parent="."]
+position = Vector2( 0, -8 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpZone"]
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 3 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -8 )
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Idle = SubResource( 5 )
+[connection signal="body_entered" from="PlayerDriftZone" to="PlayerDriftZone" method="_on_PlayerDriftZone_body_entered"]
+[connection signal="body_exited" from="PlayerDriftZone" to="PlayerDriftZone" method="_on_PlayerDriftZone_body_exited"]
+[connection signal="drift_ended" from="PlayerDriftZone" to="." method="_on_PlayerDriftZone_drift_ended"]
+[connection signal="drift_started" from="PlayerDriftZone" to="." method="_on_PlayerDriftZone_drift_started"]
+[connection signal="body_entered" from="PickUpZone" to="PickUpZone" method="_on_PickUpZone_body_entered"]
+[connection signal="body_exited" from="PickUpZone" to="PickUpZone" method="_on_PickUpZone_body_exited"]
+[connection signal="pickup_ended" from="PickUpZone" to="." method="_on_PickUpZone_pickup_ended"]
+[connection signal="pickup_started" from="PickUpZone" to="." method="_on_PickUpZone_pickup_started"]
+
+[editable path="SoftCollision"]

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://Items/Item.gd" type="Script" id=1]
+[ext_resource path="res://Player/Bottom/bottom_plate.png" type="Texture" id=2]
+[ext_resource path="res://Items/Icons/bottom_platelegs.png" type="Texture" id=3]
+
+[resource]
+script = ExtResource( 1 )
+name = "Platelegs"
+icon = ExtResource( 3 )
+texture = ExtResource( 2 )
+show_hair = false
+show_bottom = false
+show_shoes = true
+show_cape = false
+tuckable = false
+speed_mod = -6.0
+type_roll_weight = 0.3
+tot_roll_weight = 1.0
+type = "BOTTOM"

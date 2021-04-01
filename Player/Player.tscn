@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Globals/CompositeSprites.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Globals/PlayerStats.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Shadows/shadow_player.png" type="Texture" id=4]
+[ext_resource path="res://Hitboxes and Hurtboxes/SoftCollision.tscn" type="PackedScene" id=6]
+
+
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.0
+height = 8.0
+
+[sub_resource type="CircleShape2D" id=2]
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Shadow" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="MountAttachPoint" type="Node2D" parent="."]
+position = Vector2( 0, -11 )
+
+[node name="LeftAttachPoint" type="Node2D" parent="MountAttachPoint"]
+position = Vector2( -9, 0 )
+
+[node name="RightAttachPoint" type="Node2D" parent="MountAttachPoint"]
+position = Vector2( 9, 0 )
+
+[node name="CompositeSprites" parent="." instance=ExtResource( 2 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -4 )
+rotation = -1.5708
+shape = SubResource( 1 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, -11 )
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 2 )
+
+[node name="PlayerStats" parent="." instance=ExtResource( 3 )]
+[connection signal="input_event" from="." to="." method="_on_Player_input_event"]
+
+[editable path="SoftCollision"]

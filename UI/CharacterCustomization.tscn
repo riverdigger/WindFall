@@ -1,0 +1,126 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Player/Body/body.png" type="Texture" id=1]
+[ext_resource path="res://Player/Eyes/eyes_default.png" type="Texture" id=2]
+[ext_resource path="res://Player/Hair/hair_connie.png" type="Texture" id=3]
+[ext_resource path="res://UI/CharacterCustomization.gd" type="Script" id=4]
+[ext_resource path="res://UI/arrow_left_small.png" type="Texture" id=5]
+[ext_resource path="res://Globals/CompositeSprites.gd" type="Script" id=6]
+[ext_resource path="res://Effects/hue_shift_material.tres" type="Material" id=7]
+[ext_resource path="res://Effects/color_shift_material.tres" type="Material" id=8]
+[ext_resource path="res://UI/arrow_right_small.png" type="Texture" id=9]
+[ext_resource path="res://UI/dice.png" type="Texture" id=10]
+[ext_resource path="res://Player/Top/top_dress_shirt.png" type="Texture" id=11]
+
+
+
+[node name="CharacterCustomization" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="CompositeSprites" type="Node2D" parent="."]
+position = Vector2( 160, 88 )
+script = ExtResource( 6 )
+
+[node name="Body" type="Sprite" parent="CompositeSprites"]
+material = ExtResource( 8 )
+texture = ExtResource( 1 )
+hframes = 20
+
+[node name="Eyes" type="Sprite" parent="CompositeSprites"]
+material = ExtResource( 7 )
+texture = ExtResource( 2 )
+hframes = 20
+
+[node name="Hair" type="Sprite" parent="CompositeSprites"]
+texture = ExtResource( 3 )
+hframes = 20
+
+[node name="Top" type="Sprite" parent="CompositeSprites"]
+texture = ExtResource( 11 )
+hframes = 20
+
+[node name="Hair" type="Node2D" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hair"]
+margin_left = 238.0
+margin_top = 60.0
+margin_right = 278.0
+margin_bottom = 76.0
+text = "Hair"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="HairPrev" type="Button" parent="Hair"]
+margin_left = 216.0
+margin_top = 56.0
+margin_right = 238.0
+margin_bottom = 76.0
+icon = ExtResource( 5 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HairNext" type="Button" parent="Hair"]
+margin_left = 264.0
+margin_top = 56.0
+margin_right = 286.0
+margin_bottom = 76.0
+icon = ExtResource( 9 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Eyes" type="Node2D" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Eyes"]
+margin_left = 237.0
+margin_top = 84.0
+margin_right = 285.0
+margin_bottom = 116.0
+text = "Eyes
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EyesPrev" type="Button" parent="Eyes"]
+margin_left = 216.0
+margin_top = 80.0
+margin_right = 238.0
+margin_bottom = 100.0
+icon = ExtResource( 5 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EyesNext" type="Button" parent="Eyes"]
+margin_left = 264.0
+margin_top = 80.0
+margin_right = 286.0
+margin_bottom = 100.0
+icon = ExtResource( 9 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Randomize" type="Button" parent="."]
+margin_left = 233.0
+margin_top = 104.0
+margin_right = 270.0
+margin_bottom = 124.0
+icon = ExtResource( 10 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Hair/HairPrev" to="." method="_on_HairPrev_pressed"]
+[connection signal="pressed" from="Hair/HairNext" to="." method="_on_HairNext_pressed"]
+[connection signal="pressed" from="Eyes/EyesPrev" to="." method="_on_EyesPrev_pressed"]
+[connection signal="pressed" from="Eyes/EyesNext" to="." method="_on_EyesNext_pressed"]
+[connection signal="pressed" from="Randomize" to="." method="_on_Randomize_pressed"]

@@ -1,0 +1,56 @@
+shader_type canvas_item;
+uniform float age;
+uniform sampler2D mask_texture;
+
+vec3 rgb2hsb(vec3 c){
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz),
+                vec4(c.gb, K.xy),
+                step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r),
+                vec4(c.r, p.yzx),
+                step(p.x, c.r));
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)),
+                d / (q.x + e),
+                q.x);
+}
+
+vec3 hsb2rgb(vec3 c){
+    vec3 rgb = clamp(abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),
+                    6.0)-3.0)-1.0,
+                    0.0,
+                    1.0 );
+    rgb = rgb*rgb*(3.0-2.0*rgb);
+    return c.z * mix(vec3(1.0), rgb, c.y);
+}
+
+float rand(float time){
+    return sin(cos(time));
+}
+
+void fragment() {
+	// Get color from the sprite texture at the current pixel we are rendering
+    vec4 original_color = texture(TEXTURE, UV);
+    vec3 col = original_color.rgb;
+    // If not greyscale
+    if(col[0] != col[1] || col[1] != col[2]) {
+        vec3 hsb = rgb2hsb(col);
+        // Shift the color by shift_amount, but rolling over the value goes over 1
+		if (age >= 70.0) {
+        	hsb.z = hsb.z + 0.23; // -0.6 to 0.3 is a good modifier range
+		}
+        col = hsb2rgb(hsb);
+		if (age >= 70.0) {
+			col = vec3(dot(col.rgb, vec3(0.299, 0.587, 0.114)));
+		}
+    }
+    COLOR = vec4(col.rgb, original_color.a);
+	vec4 colour = texture(TEXTURE, UV);
+    colour.a *= texture(mask_texture, UV).a;
+	colour.r = COLOR.r;
+	colour.g = COLOR.g;
+	colour.b = COLOR.b;
+    COLOR = colour;
+}

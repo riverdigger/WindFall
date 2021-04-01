@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://People/NPC.gd" type="Script" id=1]
+[ext_resource path="res://Globals/CompositeSprites.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Navigation.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Shadows/shadow_player.png" type="Texture" id=4]
+[ext_resource path="res://People/PlayerDetectionZone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Hitboxes and Hurtboxes/SoftCollision.tscn" type="PackedScene" id=11]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.0
+height = 7.99999
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 49.0
+
+[sub_resource type="CircleShape2D" id=3]
+
+[node name="NPC" type="KinematicBody2D"]
+collision_layer = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Shadow" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="CompositeSprites" parent="." instance=ExtResource( 2 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -4 )
+rotation = -1.5708
+shape = SubResource( 1 )
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 9 )]
+position = Vector2( 0, -18 )
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+shape = SubResource( 2 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 11 )]
+position = Vector2( 0, -11 )
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 3 )
+
+[node name="InteractKeyAttachPoint" type="Node2D" parent="."]
+position = Vector2( 0, -45 )
+
+[node name="Navigation" parent="." instance=ExtResource( 3 )]
+
+[node name="Stats" parent="." instance=ExtResource( 10 )]
+curr_hair = 3
+curr_eyes = 2
+curr_bottom = 3
+curr_top = 2
+curr_tuck = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+[connection signal="input_event" from="." to="." method="_on_NPC_input_event"]
+[connection signal="interact_ended" from="PlayerDetectionZone" to="." method="_on_PlayerDetectionZone_interact_ended"]
+[connection signal="interact_started" from="PlayerDetectionZone" to="." method="_on_PlayerDetectionZone_interact_started"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[editable path="PlayerDetectionZone"]
+
+[editable path="SoftCollision"]
