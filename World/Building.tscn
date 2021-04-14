@@ -18,7 +18,7 @@ texture = ExtResource( 1 )
 position = Vector2( 0, -4 )
 scale = Vector2( 1, 0.953345 )
 build_mode = 1
-polygon = PoolVector2Array( -71, 0, -19.235, 0, -18, -33.2448, 18, -33.2448, 18.8626, 0, 71, 0, 62, -71, -62, -71 )
+polygon = PoolVector2Array( -69, 4.19575, -19.235, 0, -19, -33.566, 19, -33.566, 18.8626, 0, 69, 4.19575, 65, -70.2789, -65, -70.2789 )
 
 [node name="DoorZone" type="Area2D" parent="."]
 collision_layer = 0

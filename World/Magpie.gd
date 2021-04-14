@@ -24,6 +24,7 @@ onready var wanderTimer = $WanderTimer
 onready var animatedSprite = $AnimatedSprite
 onready var timer = $Timer
 onready var playerDetectionZone = $PlayerDetectionZone
+onready var shadowSprite = $Shadow
 
 func is_colliding():
 	var areas = playerDetectionZone.get_overlapping_areas()
@@ -49,12 +50,14 @@ func _physics_process(delta):
 	var direction = target
 	match state:
 		IDLE:
+			shadowSprite.visible = true
 			z_index = 0
 			direction = Vector2.ZERO
 			animatedSprite.play("Idle")
 		WANDER:
-			pass
+			shadowSprite.visible = false
 		RETURN:
+			shadowSprite.visible = false
 			target = global_position.direction_to(start_pos)
 			if global_position.distance_to(start_pos) < 5.0:
 				state = IDLE

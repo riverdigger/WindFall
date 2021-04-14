@@ -11,6 +11,7 @@ var composite_sprites = CompositeSprites
 var rng = RandomNumberGenerator.new()
 var mount_collision
 var just_mounted = true
+var speed_mod = 0
 
 # STATES
 enum {
@@ -216,6 +217,9 @@ func inventory_state(_delta):
 	cameraController.request_focus(self)
 	
 func mounted_state(delta):
+	if Input.is_action_just_pressed("ui_shift"):
+		speed_mod = 0
+	
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
@@ -274,6 +278,12 @@ func mounted_state(delta):
 
 
 func move_state(delta):
+	if Input.is_action_just_pressed("ui_shift"):
+		speed_mod = 50
+		stats.MAX_SPEED -= speed_mod
+	elif Input.is_action_just_released("ui_shift"):
+		stats.MAX_SPEED += speed_mod
+	
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
