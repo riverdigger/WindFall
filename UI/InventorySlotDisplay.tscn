@@ -42,3 +42,7 @@ align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TypeSprite" type="Sprite" parent="ItemTextureRect"]
+position = Vector2( 19, 5 )
+scale = Vector2( 0.25, 0.25 )

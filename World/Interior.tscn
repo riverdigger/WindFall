@@ -543,9 +543,6 @@ __meta__ = {
 
 [node name="WorldNavigation" parent="." instance=ExtResource( 1 )]
 
-[node name="DirtTileMap" parent="WorldNavigation/Navigation2D" index="0"]
-tile_data = PoolIntArray(  )
-
 [node name="ExitZone" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1, 14 )
 door_scene = "res://World/World.tscn"

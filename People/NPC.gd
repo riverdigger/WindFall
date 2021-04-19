@@ -49,7 +49,9 @@ var bush_instance
 func _ready():
 	animationTree.active = true
 	stats.connect("item_equipped", self, "_on_item_equipped")
-	randomize_npc()
+	var save_game = File.new()
+	if not save_game.file_exists("user://savegame.save"):
+		randomize_npc()
 
 func _on_item_equipped(item, item_type):
 	stats.MAX_SPEED = stats.DEFAULT_MAX_SPEED
@@ -335,3 +337,71 @@ func randomize_npc():
 func set_state(value):
 	prev_state = state
 	state = value	
+
+func save():
+	var equipment = []
+	if stats.HatItem:
+		equipment.push_back(stats.HatItem.name)
+	if stats.CapeItem:
+		equipment.push_back(stats.CapeItem.name)
+	if stats.TopItem:
+		equipment.push_back(stats.TopItem.name)
+	if stats.BottomItem:
+		equipment.push_back(stats.BottomItem.name)
+	if stats.ShoesItem:
+		equipment.push_back(stats.ShoesItem.name)
+	var save_dict = {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"pos_x" : position.x, # Vector2 is not supported by JSON
+		"pos_y" : position.y,
+		"curr_body": stats.curr_body,
+		"curr_eyes": stats.curr_eyes,
+		"curr_hair": stats.curr_hair,
+		"equipment": equipment,
+		"age": stats.age,
+		"bodyMod": stats.bodyMod,
+		"eyesMod": stats.eyesMod,
+		"MAX_SPEED": stats.MAX_SPEED,
+		"mount": stats.mount,
+		"path": stats.path,
+		"velocity_x": velocity.x,
+		"velocity_y": velocity.y,
+		"target_x": stats.target.x,
+		"target_y": stats.target.y
+	}
+	return save_dict
+	
+func load_from_data(data):
+	velocity = Vector2(data["velocity_x"], data["velocity_y"])
+	stats.target = Vector2(data["target_x"], data["target_y"])
+	stats.MAX_SPEED = data["MAX_SPEED"]
+	stats.DEFAULT_MAX_SPEED = stats.MAX_SPEED
+
+	stats.age = data["age"]
+	stats.curr_eyes = int(data["curr_eyes"])
+	stats.curr_hair = int(data["curr_hair"])
+	
+	stats.bodyMod = data["bodyMod"]
+	stats.eyesMod = data["eyesMod"]
+	if stats.age >= 70.0:
+		stats.curr_body = 1
+	else:
+		stats.curr_body = 0
+	
+	bodySprite.texture = composite_sprites.body_spritesheet[stats.curr_body]
+	print(composite_sprites.hair_spritesheet[16])
+	hairSprite.texture = composite_sprites.hair_spritesheet[stats.curr_hair]["texture"]
+	if composite_sprites.hair_spritesheet[stats.curr_hair].has("back_texture"):
+		hairbackSprite.texture = composite_sprites.hair_spritesheet[stats.curr_hair]["back_texture"]
+	else:
+		hairbackSprite.texture = null
+	bodySprite.get_material().set_shader_param("bodyMod", stats.bodyMod)	
+	eyesSprite.get_material().set_shader_param("eyesMod", stats.eyesMod)	
+	hairSprite.get_material().set_shader_param("age", stats.age)
+	hairbackSprite.get_material().set_shader_param("age", stats.age)
+
+	for item_name in data["equipment"]:
+		var item = ItemDB.lookup_item(item_name)
+		if item:
+			stats.equip_item(item, item.type)

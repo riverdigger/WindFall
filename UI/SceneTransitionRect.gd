@@ -13,6 +13,9 @@ func _ready():
 	animationPlayer.play_backwards("Fade")
 
 func transition_to(_next_scene := next_scene_path):
+	print(_next_scene)
+	if _next_scene != "res://World/World.tscn":
+		yield(Global.save_game(), "completed")
 	# Plays the Fade animation and wait until it finishes
 	animationPlayer.play("Fade")
 	yield(animationPlayer, "animation_finished")

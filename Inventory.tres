@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=35 format=2]
+[gd_resource type="Resource" load_steps=37 format=2]
 
 [ext_resource path="res://Inventory.gd" type="Script" id=1]
 [ext_resource path="res://Items/CapeDarkCloak.tres" type="Resource" id=2]
@@ -34,8 +34,10 @@
 [ext_resource path="res://Items/HatCultist.tres" type="Resource" id=32]
 [ext_resource path="res://Items/TopCultist.tres" type="Resource" id=33]
 [ext_resource path="res://Items/HatTall.tres" type="Resource" id=34]
+[ext_resource path="res://Items/HatWitch.tres" type="Resource" id=35]
+[ext_resource path="res://Items/TopHobbit.tres" type="Resource" id=36]
 
 [resource]
 script = ExtResource( 1 )
-items = [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 18 ), ExtResource( 23 ), ExtResource( 19 ), ExtResource( 14 ), ExtResource( 6 ), ExtResource( 25 ), ExtResource( 20 ), ExtResource( 13 ), ExtResource( 24 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 17 ), ExtResource( 12 ), ExtResource( 16 ), ExtResource( 22 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 30 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ]
+items = [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 18 ), ExtResource( 23 ), ExtResource( 19 ), ExtResource( 14 ), ExtResource( 6 ), ExtResource( 25 ), ExtResource( 20 ), ExtResource( 13 ), ExtResource( 24 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 17 ), ExtResource( 12 ), ExtResource( 16 ), ExtResource( 22 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 30 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ]
 equipment = [ ExtResource( 14 ), ExtResource( 2 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 20 ) ]

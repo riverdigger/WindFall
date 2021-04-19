@@ -9,7 +9,6 @@
 [ext_resource path="res://Globals/CompositeSprites.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/PlayerModel.gd" type="Script" id=8]
 
-
 [node name="InventoryContainer" type="ColorRect"]
 margin_left = 1.0
 margin_top = 1.0

@@ -5,16 +5,31 @@ export(String, "ANY", "BOTTOM", "HAT", "SHOES", "TOP", "CAPE") var item_type = "
 export(String, "INVENTORY", "EQUIPMENT") var container_type = "INVENTORY"
 onready var itemTextureRect = $ItemTextureRect
 onready var itemAmountLabel = $ItemTextureRect/ItemAmountLabel
+#onready var typeSprite = $ItemTextureRect/TypeSprite
 
 func display_item(item):
 	if item is Item:
 		itemTextureRect.texture = item.icon
+#		if item.type == "HAT":
+#			typeSprite.texture = load("res://UI/HatType.png")
+#		elif item.type == "CAPE":
+#			typeSprite.texture = load("res://UI/CapeType.png")
+#		elif item.type == "TOP":
+#			typeSprite.texture = load("res://UI/TopType.png")
+#		elif item.type == "BOTTOM":
+#			typeSprite.texture = load("res://UI/BottomType.png")
+#		elif item.type == "SHOES":
+#			typeSprite.texture = load("res://UI/ShoesType.png")
+#		else:
+#			typeSprite.texture = null
+			
 		if item.amount != 1:
 			itemAmountLabel.text = str(item.amount)
 		else:
 			itemAmountLabel.text = ""
 	else:
 		itemTextureRect.texture = null
+#		typeSprite.texture = null
 		itemAmountLabel.text = ""
 
 func get_drag_data(_position):
