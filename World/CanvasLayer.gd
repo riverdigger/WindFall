@@ -9,6 +9,7 @@ signal inventory_modal_changed(modal_state)
 
 func _on_Randomize_pressed():
 	ItemDB.randomize_object(player, true)
+	npcs = get_node("../YSort/NPCs").get_children()
 	for npc in npcs:
 		npc.randomize_npc()
 

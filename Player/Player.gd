@@ -270,8 +270,12 @@ func mounted_state(delta):
 	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 750
-	velocity = move_and_slide(velocity)
-	
+	velocity = move_and_slide(velocity, Vector2.ZERO, false, 4, PI/4, false)
+#	velocity = move_and_slide(velocity)
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.is_in_group("Pushable"):
+			collision.collider.apply_central_impulse(-collision.normal * stats.INERTIA)
 		
 	if velocity == Vector2.ZERO:
 		stats.hasDust = false
@@ -313,7 +317,12 @@ func move_state(delta):
 	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 750
-	velocity = move_and_slide(velocity)
+	velocity = move_and_slide(velocity, Vector2.ZERO, false, 4, PI/4, false)
+#	velocity = move_and_slide(velocity)
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.is_in_group("Pushable"):
+			collision.collider.apply_central_impulse(-collision.normal * stats.INERTIA)
 	
 	if velocity == Vector2.ZERO:
 		stats.hasDust = false

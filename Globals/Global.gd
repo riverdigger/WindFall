@@ -60,3 +60,9 @@ func load_game():
 #			new_object.set(i, node_data[i])
 
 	save_game.close()
+
+func _notification(what):
+	if (what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST):
+		yield(save_game(), "completed")
+		print("Game Saved")
+		get_tree().quit()

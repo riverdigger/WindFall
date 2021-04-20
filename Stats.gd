@@ -26,6 +26,7 @@ export var ACCELERATION = 500
 export var MAX_SPEED = 120
 export var DEFAULT_MAX_SPEED = 120
 export var RUN_SPEED = 120 # When run animation should start playing
+export var INERTIA = 35
 export var WANDER_RING_DISTANCE = 75
 export var WANDER_RING_RADIUS = 25
 var mount = null

@@ -19,6 +19,9 @@ var capes_weight
 var total_items = []
 
 func lookup_item(name):
+	if total_items == []:
+		init_probabilities()
+
 	for item in total_items:
 		if item.name == name:
 			return item

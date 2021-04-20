@@ -162,6 +162,7 @@ ui_shift={
 2d_physics/layer_5="NPCInteractbox"
 2d_physics/layer_6="SoftCollisions"
 2d_physics/layer_7="Items"
+2d_physics/layer_8="Barrels"
 
 [rendering]
 

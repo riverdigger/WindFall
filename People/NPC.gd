@@ -350,6 +350,7 @@ func save():
 		equipment.push_back(stats.BottomItem.name)
 	if stats.ShoesItem:
 		equipment.push_back(stats.ShoesItem.name)
+#	print(equipment)
 	var save_dict = {
 		"filename" : get_filename(),
 		"parent" : get_parent().get_path(),
@@ -390,7 +391,6 @@ func load_from_data(data):
 		stats.curr_body = 0
 	
 	bodySprite.texture = composite_sprites.body_spritesheet[stats.curr_body]
-	print(composite_sprites.hair_spritesheet[16])
 	hairSprite.texture = composite_sprites.hair_spritesheet[stats.curr_hair]["texture"]
 	if composite_sprites.hair_spritesheet[stats.curr_hair].has("back_texture"):
 		hairbackSprite.texture = composite_sprites.hair_spritesheet[stats.curr_hair]["back_texture"]
